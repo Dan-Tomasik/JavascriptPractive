@@ -1,0 +1,45 @@
+<html>
+  <body>
+  <script>
+    
+    function createInput(placeHolder, id){
+      var input = document.createElement("input");
+      input.setAttribute("type", "text");
+      input.setAttribute("id", id);
+      input.setAttribute("placeholder", placeHolder);
+      document.body.appendChild(input);
+      document.write("<br><br>");
+      return input
+    }
+    
+    createInput("full name", "name");
+    createInput("email address", "email");
+    createInput("post code", "postCode");
+    createInput("phone number", "number");
+        
+    var button = document.createElement("button");
+    button.append("submit");
+    document.body.appendChild(button);
+    
+    button.addEventListener("click", function() {
+      if(!/^[a-zA-Z]+\s[a-zA-Z\s]+$/.test(document.getElementById("name").value)){
+        window.alert("invalid name");
+        console.log(document.getElementById("name").value);
+        
+      } else if(!/^[a-zA-Z0-9_\-\.]+@[a-zA-Z0-9_\-]+\.[a-zA-Z]+$/.test(document.getElementById("email").value)){
+        window.alert("invalid email");
+        
+      } else if(!/^[a-zA-Z0-9]{2,4}\s?[0-9][a-zA-Z]{2}$/.test(document.getElementById("postCode").value)){
+        window.alert("invalid post code");
+    
+      } else if(!/^[+0-9]{11}$/.test(document.getElementById("number").value)){
+        window.alert("invalid phone number");
+                
+      } else {
+        window.alert("your details have been submitted");
+      }
+    });
+    
+  </script>
+  </body>
+</html>

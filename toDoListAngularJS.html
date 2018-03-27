@@ -1,0 +1,59 @@
+<html ng-app="myApp">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<style>
+  *{
+    background-color: white;
+    font-family: sans-serif;
+    border:0;
+    outline: none;
+  }
+  button{
+    position: absolute;
+    left: 260px;
+    color: gray;
+    border-width: 0px;
+  }
+  button:hover{
+    color: red;
+  }
+  div, input{
+    word-wrap: break-word;
+    width: 250px;
+    border-top-style: solid;
+    border-color: gray;
+    border-width: 3px;
+    font-size: 15px;
+    padding-left: 5px; 
+  }
+</style>
+<h1>
+    To do list:
+</h1>
+<body ng-controller="myCtrl" id="body">
+<input ng-model="input" autofocus ng-keyup = "enterFunc($event)" placeholder=" type here">
+<script>
+  
+  var app = angular.module("myApp", []);
+  app.controller("myCtrl", function($scope){
+    
+    $scope.enterFunc = function(keyEvent){
+      if(keyEvent.which === 13 && /\w/.test($("input").val())){
+        var div = document.createElement("div"),
+            button = document.createElement("button");
+        
+        button.addEventListener("click", function() {
+          ($(this).parents("div:first")).remove();
+        })
+        
+        button.append("x");
+        div.append($scope.input)
+        div.append(button);
+        $("input").before(div);
+        $scope.input = "";
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+<script>
+  
+  function bubbleSort(array){
+    var swap = 0;
+    for(var i = 0; i < array.length; i++){
+      if(array[i] > array[i+1]){
+        var temp = array[i];
+        array[i] = array[i+1];
+        array[i+1] = temp;
+        swap++;
+      }
+      if (swap != 0){
+        swap = 0;
+        bubbleSort(array);
+      }
+    }
+  }
+  
+  function mergeSort(array){
+    var arr = array,
+        middle = Math.floor(arr.length / 2),
+        left   = arr.slice(0, middle),
+        right  = arr.slice(middle, array.length);
+    
+    if(arr.length === 1){
+      return arr;
+    }
+    
+    return merge(mergeSort(left), mergeSort(right));
+    console.log(arr);
+  }
+  
+  function merge(left, right){
+    var result = [];
+    
+    while(left.length || right.length){
+      
+      if(left.length && right.length){
+        
+        if(left[0] < right [0]){
+          result.push(left.shift());
+        } else {
+          result.push(right.shift());
+        }
+      } else if (left.length){
+        result.push(left.shift());
+      } else {
+        result.push(right.shift());
+      }
+    }
+    return result;
+  }
+  
+  function input(){
+    var selection = prompt("would you like to use bubble or merge sort?", "bubble/merge");
+    if (selection == "merge"){
+      array = mergeSort(array);
+    }else if(selection == "bubble"){
+      bubbleSort(array);
+    }else{
+      window.alert("invalid input");
+      input();
+    }
+  }
+  
+  var j = 0,
+      k = 0,
+      array = [];
+  
+  for(i = 0; i < 20; i++){
+    array.push(Math.floor(Math.random()*100));
+  }
+  
+  document.write("Starting numbers: " + array + "<br>");
+  input();
+  document.write(" Ordered numbers: " + array);
+  
+</script>      
+</html>
